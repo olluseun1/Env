@@ -10,7 +10,9 @@ variable bucket {}
 variable key {}
 variable sg_name {}
 
-terraform {
+
+
+  terraform {
   required_providers {
     aws = {
       source  = "hashicorp/aws"
@@ -18,16 +20,16 @@ terraform {
     }
   }
 required_version = ">= 1.2.0"
-}
   backend "s3" {
+    # bucket = "techbleat-terraform-statefile"
     bucket = var.bucket
-    #bucket = "techbleat-terraform-statefile"
+    # key    = "dev/terraform.tfstate"
     key = var.key
-    #key    = "dev/terraform.tfstate"
     region = "eu-west-1"
   }
+}
 
-  provider "aws" {
-    region = "eu-west-1"
-    
-  }
+provider "aws" {
+  #profile = "default" # AWS Credentials Profile configured on your local desktop terminal  $HOME/.aws/credentials
+  region  = "eu-west-1"
+}
